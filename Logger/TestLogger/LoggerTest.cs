@@ -5,6 +5,7 @@ using Microsoft.Practices.Unity;
 using Microsoft.Practices.Unity.Configuration;
 using System.Configuration;
 using System.IO;
+using Moq;
 
 namespace TestLogger
 {
@@ -59,5 +60,46 @@ namespace TestLogger
             logger.LogWarning("Warning message test");
         }
 
+        [TestMethod]
+        public void TestLogError()
+        {
+            var mock = new Mock<ILogger>();
+            mock.Setup(t => t.LogError("Message error test")).Callback(() => LogErrorMock("Message error test"));
+
+            mock.Object.LogError("Message error test");
+        }
+
+        [TestMethod]
+        public void TestInfoError()
+        {
+            var mock = new Mock<ILogger>();
+            mock.Setup(t => t.LogInfo("Message info test")).Callback(() => LogInfoMock("Message info test"));
+
+            mock.Object.LogInfo("Message info test");
+        }
+        
+        [TestMethod]
+        public void TestWarningError()
+        {
+            var mock = new Mock<ILogger>();
+            mock.Setup(t => t.LogWarning("Message warning test")).Callback(() => LogWarningMock("Message warning test"));
+
+            mock.Object.LogWarning("Message warning test");
+        }
+
+        private void LogErrorMock(string message)
+        {
+            Assert.AreEqual("Message error test", message);
+        }
+
+        private void LogInfoMock(string message)
+        {
+            Assert.AreEqual("Message info test", message);
+        }
+
+        private void LogWarningMock(string message)
+        {
+            Assert.AreEqual("Message warning test", message);
+        }
     }
 }
