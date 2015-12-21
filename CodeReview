@@ -1,0 +1,9 @@
+1) Code Review:
+
+- Write a "Logger" interface, so you can implement different Logger classes to log to different destinations, such as text file, console, database, or any other. 
+- Une enum class to identify different logging levels (such as warning, info or error, for example), and other enum class to identify logger destination (such as Database, Text file or any ohter). Avoid using "harcoded" values.
+- Use application configuration to determine if a logging level is enabled or not. 
+- Dispose the sql connection and sql command.
+- Use DependencyInjection tu use independent implementations of loggers. All loggers must implement an interface.
+- Use an abstract class to implement common behaviors for different loggers.
+
